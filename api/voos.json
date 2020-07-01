@@ -1,0 +1,16 @@
+[
+{
+"origem": "CNF",
+"destino": "POA",
+"distancia": 1250,
+"duracao": 3,
+"aeronave": "Foker 100"
+},
+{
+"origem": "CNF",
+"destino": "POA",
+"distancia": 1250,
+"duracao": 3,
+"aeronave": "Foker 100"
+}
+]

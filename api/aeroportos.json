@@ -1,0 +1,30 @@
+{
+    "AAX": {
+    "iata": "AAX",
+    "city": "Araxa",
+    "lat": -19.568056,
+    "lon": -46.92917,
+    "state": "MG"
+    },
+    "AFL": {
+    "iata": "AFL",
+    "city": "Alta Floresta",
+    "lat": -9.872456,
+    "lon": -56.104767,
+    "state": "MT"
+    },
+    "AJU": {
+    "iata": "AJU",
+    "city": "Aracaju",
+    "lat": -10.987206,
+    "lon": -37.072792,
+    "state": "SE"
+    },
+    "AQA": {
+    "iata": "AQA",
+    "city": "Araraquara",
+    "lat": -21.816668,
+    "lon": -48.13333,
+    "state": "SP"
+    }
+    }

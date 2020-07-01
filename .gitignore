@@ -1,0 +1,20 @@
+# compiled output
+frontend/dist
+frontend/tmp
+frontend/out-tsc
+# Only exists if Bazel was run
+frontend/bazel-out
+
+# dependencies
+frontend/node_modules
+
+# misc
+frontend/.sass-cache
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/npm-debug.log
+frontend/yarn-error.log
+frontend/testem.log
+frontend/typings
+
