@@ -149,9 +149,6 @@ class Voos
                 $chegada = new DateTime($horario['arrival_time']);
                 $interval = $saida->diff($chegada);
 
-                var_dump($interval);
-                die();
-
                 $duracao = $interval->format('%h')." h ".$interval->format('%i')." min";
             }
         }
@@ -186,13 +183,18 @@ class Voos
         $this->excluiDadosBD();
 
         $aeroportos = $this->buscaAeroportos();
-
-        $chaveUltimoProcessamento = '';
+        
         $ultimoProcessamento = $this->bancoDeDados->buscaRegistro("SELECT origem, destino FROM processamentos WHERE DATA = '$dataViagem'");
 
         if ($ultimoProcessamento != null) {
             $chaveUltimoProcessamento = $ultimoProcessamento[0] . $ultimoProcessamento[1];
-        }
+			$processar = false;
+			$limite = 20;
+        } else {
+			$chaveUltimoProcessamento = '';
+			$processar = true;
+			$limite = 4; // Primeira iteração - atualiza mais rápido a tela.
+		}
 
         $contador = 0;
 
@@ -200,20 +202,25 @@ class Voos
         $object->processando = false;
 
         foreach ($this->combinacoesDeAeroportos as $aeroporto) {
+			
+			// Verifica se foi o ponto onde parou.
+			if ((!$processar) && ($chaveUltimoProcessamento != '') && ($aeroporto[0] . $aeroporto[1] == $chaveUltimoProcessamento)) {
+				$processar = true;
+				continue;
+			}
 
-            // Processa, ignorando o que já foi processado anteriormente.
-            if (($chaveUltimoProcessamento === '') || ($aeroporto[0] . $aeroporto[1] >= $chaveUltimoProcessamento)) {
-                $this->capturaVoos($aeroportos[$aeroporto[0]], $aeroportos[$aeroporto[1]], $dataViagem);    
-                $contador++;
-            } 
+			if ($processar) {
 
-            
-            if ($contador === 20) {
-                $object->processando = true;
-                echo json_encode($object);
-                die();
-                break;
-            }
+				$this->capturaVoos($aeroportos[$aeroporto[0]], $aeroportos[$aeroporto[1]], $dataViagem);    
+				$contador++;
+
+				if ($contador == $limite) {
+					$object->processando = true;
+					echo json_encode($object);
+					die();
+					break;
+				}
+			} 
         }
 
         echo json_encode($object);
