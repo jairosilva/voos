@@ -1,62 +1,12 @@
-<div class="d-flex justify-content-center">
-  <label>Viagens mais Longas</label>
-</div>
+<div>
+  <div class="d-flex justify-content-center">
+    <label>Viagens mais Longas</label>
+  </div>
 
-
-<table mat-table [dataSource]="dataSource" class="w-100">
-  <ng-container matColumnDef="linha">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td
-      id="numeroColuna"
-      mat-cell
-      *matCellDef="let element; let i = index"
-    >
-      {{ i + 1 }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="origem">
-    <th mat-header-cell *matHeaderCellDef>Origem</th>
-    <td mat-cell *matCellDef="let element">{{ element.origem }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="destino">
-    <th mat-header-cell *matHeaderCellDef>Destino</th>
-    <td mat-cell *matCellDef="let element">{{ element.destino }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="distancia">
-    <th mat-header-cell *matHeaderCellDef>Distância</th>
-    <td mat-cell *matCellDef="let element">{{ element.distancia }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="duracao">
-    <th mat-header-cell *matHeaderCellDef>Duraçao</th>
-    <td mat-cell *matCellDef="let element">
-      {{ element.duracao }}
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="aeronave">
-    <th mat-header-cell *matHeaderCellDef>Aeronave</th>
-    <td mat-cell *matCellDef="let element">{{ element.aeronave }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-
-<!-- <div class="w-100 p-3">
-
-
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" class="w-100">
     <ng-container matColumnDef="linha">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td
-        id="numeroColuna"
-        mat-cell
-        *matCellDef="let element; let i = index"
-      >
+      <td id="numeroColuna" mat-cell *matCellDef="let element; let i = index">
         {{ i + 1 }}
       </td>
     </ng-container>
@@ -73,7 +23,9 @@
 
     <ng-container matColumnDef="distancia">
       <th mat-header-cell *matHeaderCellDef>Distância</th>
-      <td mat-cell *matCellDef="let element">{{ element.distancia }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.distancia | number: "1.2-2":"pt" }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="duracao">
@@ -91,5 +43,4 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
-</div> -->
+</div>

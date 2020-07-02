@@ -1,34 +1,6 @@
 <?php
 
-class BancoDeDados
-{
-    private $conexaoBancoDeDados;
-
-    public function __construct()
-    {
-        $this->conectaBD();
-    }
-
-    private function conectaBD()
-    {
-        $this->conexaoBancoDeDados = new mysqli('localhost', 'root', '', 'belvitur');
-        $this->conexaoBancoDeDados->set_charset("utf8");
-    }
-
-    public function executaSql($sql)
-    {
-        mysqli_query($this->conexaoBancoDeDados, $sql);
-    }
-
-    public function buscaRegistro($sql) {
-        $resultado = false;
-
-        $result = mysqli_query($this->conexaoBancoDeDados, $sql);
-        $row = mysqli_fetch_row($result);
-
-        return $row;
-    }
-}
+require 'BancoDeDados.php';
 
 class Voos
 {
@@ -38,7 +10,6 @@ class Voos
 
     private function excluiDadosBD()
     {
-        $this->bancoDeDados->executaSql('truncate voos');
         $this->bancoDeDados->executaSql('truncate distancias');
         $this->bancoDeDados->executaSql('truncate aeroportos');
     }
@@ -178,6 +149,9 @@ class Voos
                 $chegada = new DateTime($horario['arrival_time']);
                 $interval = $saida->diff($chegada);
 
+                var_dump($interval);
+                die();
+
                 $duracao = $interval->format('%h')." h ".$interval->format('%i')." min";
             }
         }
@@ -205,7 +179,7 @@ class Voos
         $this->gravaDistancias($data, $origem['iata'], $destino['iata'], $distancia);
     }
 
-    public function processa()
+    public function processa($dataViagem)
     {
         $this->bancoDeDados = new BancoDeDados();
 
@@ -213,21 +187,36 @@ class Voos
 
         $aeroportos = $this->buscaAeroportos();
 
-        $dataViagem = date('Y-m-d', strtotime(date("Y-m-d"). ' + 40 day'));
-
         $chaveUltimoProcessamento = '';
         $ultimoProcessamento = $this->bancoDeDados->buscaRegistro("SELECT origem, destino FROM processamentos WHERE DATA = '$dataViagem'");
 
         if ($ultimoProcessamento != null) {
             $chaveUltimoProcessamento = $ultimoProcessamento[0] . $ultimoProcessamento[1];
         }
+
+        $contador = 0;
+
+        $object = new stdClass();
+        $object->processando = false;
+
         foreach ($this->combinacoesDeAeroportos as $aeroporto) {
 
             // Processa, ignorando o que já foi processado anteriormente.
             if (($chaveUltimoProcessamento === '') || ($aeroporto[0] . $aeroporto[1] >= $chaveUltimoProcessamento)) {
                 $this->capturaVoos($aeroportos[$aeroporto[0]], $aeroportos[$aeroporto[1]], $dataViagem);    
+                $contador++;
             } 
+
+            
+            if ($contador === 20) {
+                $object->processando = true;
+                echo json_encode($object);
+                die();
+                break;
+            }
         }
+
+        echo json_encode($object);
     }
 
 }
@@ -256,6 +245,8 @@ function buscaDadosApi($url)
     return json_decode($file, true);
 }
 
+$dataViagem = $_GET['dataViagem'];
+
 $voos = new Voos();
-$voos->processa();
+$voos->processa($dataViagem);
 

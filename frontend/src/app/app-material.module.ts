@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table' ;
+import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatListModule, MatList} from '@angular/material/list';
+import { MatListModule, MatList } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -18,7 +18,7 @@ import {MatListModule, MatList} from '@angular/material/list';
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
   ],
   exports: [
     MatInputModule,
@@ -27,7 +27,7 @@ import {MatListModule, MatList} from '@angular/material/list';
     MatTableModule,
     MatMenuModule,
     MatDialogModule,
-    MatListModule
-  ]
+    MatListModule,
+  ],
 })
-export class AppMaterialModule { }
+export class AppMaterialModule {}

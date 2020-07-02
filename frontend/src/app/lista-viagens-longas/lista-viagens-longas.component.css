@@ -1,0 +1,11 @@
+div,
+[mat-table],
+[mat-cell],
+[mat-header-cell] {
+  background-color: #34649f;
+  color: white;
+}
+
+label {
+  color: white;
+}

@@ -1,9 +1,8 @@
 <?php
 
-$db_selected = new mysqli('localhost', 'root', '', 'belvitur');
-$db_selected->set_charset("utf8");
+include_once 'conecta.php';
 
-$dataViagem = date('Y-m-d', strtotime(date("Y-m-d"). ' + 40 day'));
+$dataViagem = $_GET['dataViagem'];
 
 $arrRetorno = array();
 if ($result = $db_selected->query("SELECT * FROM voos WHERE data_saida = '$dataViagem' ORDER BY distancia DESC LIMIT 30")) {

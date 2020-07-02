@@ -15,7 +15,7 @@ import { AeroportosMaisProximosMaisDistantesComponent } from './aeroportos-mais-
     AppComponent,
     ListaViagensLongasComponent,
     EstadoComMaisAeroportosComponent,
-    AeroportosMaisProximosMaisDistantesComponent
+    AeroportosMaisProximosMaisDistantesComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +24,6 @@ import { AeroportosMaisProximosMaisDistantesComponent } from './aeroportos-mais-
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

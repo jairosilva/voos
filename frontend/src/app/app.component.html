@@ -1,92 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>CSS Template</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 15px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-</style>
-</head>
-<body>
-
 <header>
-  <h2>Viagens</h2>
+  <h4>Viagens no dia {{ dataViagem }}</h4>
+
+  <button
+    id="btnProcessa"
+    class="btn btn-primary"
+    type="button"
+    [disabled]="processando"
+    (click)="processaVoos()"
+  >
+    <span
+      [ngClass]="{ 'spinner-border spinner-border-sm': processando }"
+      role="status"
+      aria-hidden="true"
+    ></span>
+    {{ textoBotao }}
+  </button>
+
+  <button
+    id="btnApagar"
+    class="btn btn-primary"
+    type="button"
+    [disabled]="processando"
+    (click)="apaga()"
+  >
+    Apagar
+  </button>
 </header>
 
+<hr />
 <div class="w-100 row d-flex justify-content-center">
   <app-estado-com-mais-aeroportos></app-estado-com-mais-aeroportos>
 </div>
+<hr />
 
 <div class="w-100 h-100 row">
-  <div class="w-50" style="background-color: #eee;">
+  <div class="w-50">
     <app-lista-viagens-longas></app-lista-viagens-longas>
   </div>
-  <div class="w-50" style="background-color: #eee;">
+  <div class="w-50">
     <app-aeroportos-mais-proximos-mais-distantes></app-aeroportos-mais-proximos-mais-distantes>
   </div>
 </div>
-
-</body>
-</html>

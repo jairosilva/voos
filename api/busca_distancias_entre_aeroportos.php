@@ -1,7 +1,6 @@
 <?php
 
-$db_selected = new mysqli('localhost', 'root', '', 'belvitur');
-$db_selected->set_charset("utf8");
+include_once 'conecta.php';
 
 $arrRetorno = array();
 if ($result = $db_selected->query("SELECT * FROM aeroportos ORDER BY sigla")) {

@@ -3,9 +3,48 @@
   width: 50%;
 }
 
-/* Clear floats after the columns */
 .row:after {
   content: "";
   display: table;
   clear: both;
+}
+
+button,
+#data-viagem {
+  font-size: 15px;
+}
+
+body {
+  background-color: #34649f;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  position: relative;
+  background-color: #064088;
+  padding: 25px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+header #btnProcessa {
+  position: absolute;
+  top: 15px;
+  right: 90px;
+  background-color: #d4792f;
+  color: white;
+}
+
+header #btnApagar {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background-color: #d4792f;
+  color: white;
+}
+
+header button:hover {
+  background-color: #ec7c1e;
 }
